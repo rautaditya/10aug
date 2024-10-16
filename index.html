@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Magical Journey of Love for Shubh</title>
+    <style>
+        /* @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Dancing+Script&display=swap'); */
+        
+        body, html {
+            /* font-family: 'Arial'; */
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            z-index: -1;
+        }
+        .hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+        .heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ffffff' opacity='0.7'%3E%3Cpath d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/%3E%3C/svg%3E") no-repeat center center;
+            background-size: contain;
+            pointer-events: none;
+            opacity: 0;
+            animation: fall linear infinite;
+        }
+        @keyframes fall {
+            to {
+                transform: translateY(100vh);
+                opacity: 0;
+            }
+        }
+        @keyframes running-border {
+    0% {
+        border-color: rgba(255, 0, 0, 0.5); /* Red */
+    }
+    25% {
+        border-color: rgba(0, 255, 0, 0.5); /* Green */
+    }
+    50% {
+        border-color: rgba(0, 0, 255, 0.5); /* Blue */
+    }
+    75% {
+        border-color: rgba(255, 255, 0, 0.5); /* Yellow */
+    }
+    100% {
+        border-color: rgba(255, 0, 0, 0.5); /* Back to Red */
+    }
+}
+
+.container {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 80%;
+    width: 400px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    border: 5px solid transparent; /* Transparent initial border */
+    animation: running-border 3s infinite; /* Apply the animation */
+}
+
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            color: #ff4d4d;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        .next-btn {
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1.1em;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .next-btn:hover {
+            background-color: #ff6b6b;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0,0,0,0.15);
+        }
+        .page {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+        .page.active {
+            display: block;
+            opacity: 1;
+        }
+        #finalPage {
+            font-size: 2.5em;
+            color: #ff4d4d;
+        }
+        .animate-text {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .animate-text.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        #audioControl {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            background-color: rgba(255,255,255,0.7);
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 1.5em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        #audioControl:hover {
+            background-color: rgba(255,255,255,0.9);
+        }
+        .progress-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 4px;
+            background-color: #ff4d4d;
+            transition: width 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="background"></div>
+    <div class="hearts"></div>
+    <div class="container">
+        <div class="progress-bar"></div>
+        <div id="page1" class="page active">
+            <h1 class="animate-text">My Dearest Shubh</h1>
+            <p class="animate-text">As I begin this journey through my feelings for you, I'm filled with warmth and joy...</p>
+            <button class="next-btn" onclick="nextPage()">Begin Our Journey</button>
+        </div>
+        <div id="page2" class="page">
+            <h1 class="animate-text">Kdu's Radiant Smile</h1>
+            <p class="animate-text">Your smile is like the first ray of sunshine after a stormy night, brightening even the darkest of my days...</p>
+            <button class="next-btn" onclick="nextPage()">Next Chapter</button>
+        </div>
+        <div id="page3" class="page">
+            <h1 class="animate-text">Shubh's Boundless Kindness</h1>
+            <p class="animate-text">Your kindness knows no bounds, touching everyone around you. It's like a gentle breeze, refreshing and comforting...</p>
+            <button class="next-btn" onclick="nextPage()">Continue</button>
+        </div>
+        <div id="page4" class="page">
+            <h1 class="animate-text">Cross Teeth's Shared Laughter</h1>
+            <p class="animate-text">The moments we spend laughing together are priceless. Your laughter is my favorite melody...</p>
+            <button class="next-btn" onclick="nextPage()">Next Moment</button>
+        </div>
+        <div id="page5" class="page">
+            <h1 class="animate-text">Khicdi's Unwavering Support</h1>
+            <p class="animate-text">You stand by me through thick and thin, my rock and my comfort. With you, I feel invincible...</p>
+            <button class="next-btn" onclick="nextPage()">Onward</button>
+        </div>
+        <div id="page6" class="page">
+            <h1 class="animate-text">CA Shared Dreams</h1>
+            <p class="animate-text">With you, I feel like I can achieve anything we set our minds to. Our dreams intertwine, creating a beautiful tapestry of possibilities...</p>
+            <button class="next-btn" onclick="nextPage()">Dream On</button>
+        </div>
+        <div id="page7" class="page">
+            <h1 class="animate-text">Tamate Inspiring Passion</h1>
+            <p class="animate-text">Your zest for life inspires me to be a better person every day. Your passion is contagious and uplifting...</p>
+            <button class="next-btn" onclick="nextPage()">Feel the Passion</button>
+        </div>
+        <div id="page8" class="page">
+            <h1 class="animate-text">Dhabre Magical Journey</h1>
+            <p class="animate-text">Every step with you has been an adventure I cherish. Our journey together is the greatest story ever told...</p>
+            <button class="next-btn" onclick="nextPage()">Adventure Awaits</button>
+        </div>
+        <div id="page9" class="page">
+            <h1 class="animate-text">champpppp Heartfelt Gratitude</h1>
+            <p class="animate-text">I'm thankful for every moment we've shared, and every moment to come. You are the greatest gift life has given me...</p>
+            <button class="next-btn" onclick="nextPage()">Almost There</button>
+        </div>
+        <div id="page10" class="page">
+            <h1 id="finalPage" class="animate-text">Shubh, I Love You</h1>
+            <p class="animate-text">Now and always, my heart belongs to you.</p>
+            <p>I am always with you........my champpppppppppppppp shubhhhhhhhhhh</p>
+        </div>
+    </div>
+    <audio id="backgroundMusic" loop>
+        <source src="Audio from Aditya Raut.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <button id="audioControl" onclick="toggleMusic()">🔇</button>
+
+    <script>
+        let currentPage = 1;
+        const totalPages = 10;
+        const audio = document.getElementById('backgroundMusic');
+        const audioButton = document.getElementById('audioControl');
+        const progressBar = document.querySelector('.progress-bar');
+
+        function nextPage() {
+            if (currentPage < totalPages) {
+                document.getElementById(`page${currentPage}`).classList.remove('active');
+                currentPage++;
+                document.getElementById(`page${currentPage}`).classList.add('active');
+                animateText();
+                updateProgressBar();
+            }
+        }
+
+        function animateText() {
+            const texts = document.querySelectorAll(`#page${currentPage} .animate-text`);
+            texts.forEach((text, index) => {
+                setTimeout(() => {
+                    text.classList.add('show');
+                }, index * 800);
+            });
+        }
+
+        function toggleMusic() {
+            if (audio.paused) {
+                audio.play();
+                audioButton.textContent = '🔊';
+            } else {
+                audio.pause();
+                audioButton.textContent = '🔇';
+            }
+        }
+
+        function updateProgressBar() {
+            const progress = (currentPage - 1) / (totalPages - 1) * 100;
+            progressBar.style.width = `${progress}%`;
+        }
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 3 + 2 + 's';
+            heart.style.opacity = Math.random() * 0.5 + 0.5;
+            heart.style.fontSize = Math.random() * 10 + 10 + 'px';
+            
+            const startPosition = -50; // Start above the viewport
+            heart.style.top = startPosition + 'px';
+            
+            document.querySelector('.hearts').appendChild(heart);
+
+            // Remove the heart when the animation ends
+            heart.addEventListener('animationend', function() {
+                heart.remove();
+            });
+        }
+
+        // Create hearts at regular intervals
+        setInterval(createHeart, 300);
+
+        // Initial text animation and progress bar
+        animateText();
+        updateProgressBar();
+
+        // Start music on first interaction
+        document.body.addEventListener('click', function() {
+            if (audio.paused) {
+                toggleMusic();
+            }
+        }, { once: true });
+    </script>
+</body>
+</html>
